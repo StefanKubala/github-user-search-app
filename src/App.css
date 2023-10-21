@@ -1,38 +1,223 @@
-.App {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+p {
+  margin-bottom: 0; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: "Space Mono", monospace;}
+  @media only screen and (max-width: 1200px) {
+    html {
+      font-size: 55%; } }
+  @media only screen and (max-width: 768px) {
+    html {
+      font-size: 45%; } }
+  @media only screen and (max-width: 576px) {
+    html {
+      font-size: 40%; } }
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #4b6a9b;
+  background-color: #f6f8ff;
+}
+
+.container {
+  width: 75rem;
+  padding-left: 0rem;
+  padding-right: 0rem; }
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title{
+  font-size: 3rem;
+}
+
+.form{
+  width: 100%;
+}
+
+.btn-mode{
+  display: flex;
+  gap: 2rem;
+}
+
+.mode-text{
+  font-size: 1.5rem;
+}
+
+.search-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-top: 3rem;
+  box-shadow: 0px 36px 50px -10px #bdc8ef33;
+}
+
+.search-input{
+  width: 100%;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: none;
+  font-size: 2rem;
+}
+
+.error{
+  display: none;
+}
+
+.btn-submit{
+  position: absolute;
+    right: 1rem;
+    top: 0.8rem;
+    border: 0;
+    font-size: 1.6rem;
+    border-radius: 1.2rem;
+    background-color: #0079ff;
+    color: #fff;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: scale .2s;
+}
+
+.btn-submit:hover,
+.btn-submit:active{
+  scale: 1.1;
+  background-color: #2e88ef;
+}
+
+.btn-submit:active{
+  scale: .95;
+}
+
+.user-container{
+  background-color: #fff;
+  margin-top: 2rem;
+  border-radius: 1.5rem;
+  font-size: 1.8rem;
+  padding: 3.8rem;
+  box-shadow: 0px 36px 50px -10px #bdc8ef33;
+}
+
+.user-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar{
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+}
+
+.text-right{
+  width: 64%;
+  margin-left: auto;
+  margin-top: -3rem;
+}
+
+.user-stats-wrapper{
+  display: flex;
+  justify-content: space-around;
+  background-color: #f6f8ff;
   text-align: center;
+  border-radius: 1rem;
+  padding: 1.8rem;
+  margin: 3rem 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.user-bottom-wrapper{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  gap: 16px 0;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
-.App-link {
-  color: #61dafb;
+@media only screen and (max-width: 576px) {
+  .user-bottom-wrapper {
+    flex-direction: column } }
+
+.user-date,
+.user-bio{
+  font-size: 1.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.user-info {
+  display: flex;
+  gap: 1.4rem;
+  width: 47.5%;
+  font-size: 1.5rem;
 }
+
+.user{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.user-name{
+  color: #2b3442;
+  font-weight: 600;
+  font-size: 2.2rem;
+}
+
+.user-nick{
+  color: #0079ff;
+  font-size: 1.5rem;
+}
+
+.stat-title{
+  font-size: 1.4rem;
+  margin-bottom: .5rem;
+}
+
+.stat-value{
+  text-align: left;
+  font-size: 2rem;
+  color: #000;
+}
+
+
+@media only screen and (max-width: 576px) {
+  .container{
+    width: 50rem;
+  }
+
+  .stat-value{
+    text-align: center;
+  }
+
+  .text-right{
+    margin-top: 3rem;
+    width: 100%;
+  }
+
+  .user-bottom-wrapper {
+    flex-direction: column 
+  } 
+
+  body {
+    height: auto; 
+  }
+
+  .header {
+    margin-top: 3rem; 
+  }
+
+  }
