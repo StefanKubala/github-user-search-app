@@ -176,10 +176,6 @@ body{
   flex-direction: row;
 }
 
-@media only screen and (max-width: 576px) {
-  .user-bottom-wrapper {
-    flex-direction: column } }
-
 .user-date,
 .user-bio{
   font-size: 1.4rem;
@@ -263,5 +259,4 @@ body{
   .form-icon{
     width: 2.7rem;
   }
-
   }
