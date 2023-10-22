@@ -224,6 +224,15 @@ body{
   color: #000;
 }
 
+.not-available{
+  opacity: .5;
+}
+
+.error-message{
+  font-size: 1.8rem;
+  color: #ff0000;
+  padding-top: 1rem;
+}
 
 @media only screen and (max-width: 576px) {
   .container{

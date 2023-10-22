@@ -5,6 +5,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [userData, setUserData] = useState("");
   const [isDark, setIsDark] = useState(false);
+  const [error, setError] = useState(false)
 
   // if(isDark) {
   //   document.body.classList = "#1e2a47"
@@ -14,7 +15,7 @@ function App() {
 
   const toggleDarkMode = () => {
     setIsDark(!isDark);
-    if (isDark) {
+    if (isDark) { 
       document.body.classList.remove('dark-mode-body');
     } else {
       document.body.classList.add('dark-mode-body');
@@ -53,14 +54,19 @@ function App() {
     "Dec",
   ];
 
-  async function handleSubmit(e){
+  async function handleSubmit(e){ 
     e.preventDefault();
 
-    const res = await fetch(`https://api.github.com/users/${inputValue}`);
-    const data = await res.json();
-    
-    setUserData(data)
-    console.log(data);
+    try {
+      const res = await fetch(`https://api.github.com/users/${inputValue}`);
+      if(!res.ok) setError(true);
+      if(res.ok) setError(false);
+      const data = await res.json();
+      // console.log(data);
+      setUserData(data)
+    } catch (err) {
+      setError(true)
+    }
   }
 
   const datasegments = created_at?.split("T").shift().split("-");
@@ -72,7 +78,11 @@ function App() {
         <div className='btn-mode' onClick={toggleDarkMode}>
           <p className='mode-text'>{isDark ? "LIGHT" : "DARK"}</p>
           <div className='mode-container'>
-            <img className='search-icon' src={`${isDark ? "https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-sun.svg":"https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-moon.svg" } `} alt='search-icon'></img>
+            <img className='search-icon' src={`${isDark ? 
+              "https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-sun.svg"
+              :"https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-moon.svg" } `} 
+              alt='search-icon'>  
+            </img>
           </div>
         </div>
       </header>
@@ -88,12 +98,12 @@ function App() {
           onChange={(e)=>setInputValue(e.target.value)}
           >
           </input>
-            <p className='error'>Error</p>
+            <p className='error'></p>
             <button className="btn-submit">Search</button>
           </form>
         </div>
 
-        <div className={`user-container ${isDark ? "dark-mode-background-light": ""}`}>
+          {!error && <div className={`user-container ${isDark ? "dark-mode-background-light": ""}`}>
           <div className='user-content'>
             <div className='user-header'>
             <img className='avatar' src={userData ? avatar_url : "https://avatars.githubusercontent.com/u/583231?v=4"} alt="avatar"></img>
@@ -127,24 +137,25 @@ function App() {
             <div className="user-bottom-wrapper">
               <div className="user-info">
                 <div className="bottom-icons"><img src="https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-location.svg" alt=""></img></div>
-                <p>{userData ? location==="" ? "Not available": location : "San Francisco"}</p>
+                <p className={location === "" ? "not-available": ""}>{userData ? location==="" ? "Not available": location : "San Francisco"}</p>
               </div>
               <div className="user-info">
                 <div className="bottom-icons"><img src="https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-twitter.svg" alt=""></img></div>
-                <p>{userData ? twitter_username===null ? "Not available":twitter_username : "Not available"}</p>
+                <p  className={twitter_username === null ? "not-available": ""}>{userData ? twitter_username===null ? "Not available":twitter_username : "Not available"}</p>
               </div>
               <div className="user-info">
                 <div className="bottom-icons"><img src="https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-website.svg" alt=""></img></div>
-                <p>{userData ? blog==="" ? "Not available": blog : "https://github.blog"}</p>
+                <p className={blog === "" ? "not-available": ""}>{userData ? blog==="" ? "Not available": blog : "https://github.blog"}</p>
               </div>
               <div className="user-info">
                 <div className="bottom-icons"><img src="https://untalpeluca.github.io/GitHubUserSearchApp/assets/icon-company.svg" alt=""></img></div>
-                <p>{userData ? company===null ? "@Github" :company : "Not available"}</p>
+                <p className={company === null ? "not-available": ""}>{userData ? company===null ? "Not available" :company : "@Github"}</p>
               </div>
             </div>
             </div>
           </div>
-        </div>
+        </div>}
+        {error && <p className='error-message'>User not found</p>}
     </div>
   )
 }
