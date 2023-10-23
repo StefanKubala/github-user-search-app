@@ -1,3 +1,5 @@
+This application uses the API from api.github.com and allows users to search for user information on the GitHub platform. Simply enter the name of a user on GitHub, and the app will return information about that user, such as their name, profile picture, number of repositories, number of followers, Twitter name, the name of the company they work for, and other relevant information. This app makes it easy for users to get important information about their colleagues on GitHub or developers they are interested in.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
